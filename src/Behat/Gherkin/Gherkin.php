@@ -94,10 +94,10 @@ class Gherkin
         $matches = array();
         if (preg_match('/^(.*)\:(\d+)-(\d+|\*)$/', $resource, $matches)) {
             $resource = $matches[1];
-            $filters[] = new LineRangeFilter($matches[2], $matches[3]);
+            array_unshift($filters, new LineRangeFilter($matches[2], $matches[3]));
         } elseif (preg_match('/^(.*)\:(\d+)$/', $resource, $matches)) {
             $resource = $matches[1];
-            $filters[] = new LineFilter($matches[2]);
+            array_unshift($filters, new LineFilter($matches[2]));
         }
 
         $loader = $this->resolveLoader($resource);
