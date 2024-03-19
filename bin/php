@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# We need word-splitting for the -t & --mount options to work properly
+# shellcheck disable=SC2046
+# shellcheck disable=SC2086
+docker run \
+    -i \
+    -t \
+    -v "$(pwd):/workdir" \
+    -v "$HOME/.ssh/known_hosts:/home/user/.ssh/known_hosts" \
+    --mount "source=user_cache,target=/home/user/.cache" \
+    --mount "source=user_composer,target=/home/user/.composer" \
+    --rm \
+    chekote/php:7.4-laravel8.x php "$@"
